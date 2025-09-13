@@ -10,6 +10,9 @@ export default class Game {
     this.ball = new Ball(this);
     this.keys = [];
     this.started = false;
+    this.difficulty = 1;
+    this.score = 0;
+    this.lives = 3;
     window.addEventListener("keydown", (e) => {
       if (!this.started) return;
       if (this.keys.indexOf(e.key) === -1) this.keys.push(e.key);

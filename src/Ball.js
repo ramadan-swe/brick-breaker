@@ -7,17 +7,12 @@ export default class Ball {
     this.speed = 4;
     this.vx = 1 * this.speed;
     this.vy = 2 * this.speed;
-    this.image = new Image();
-    this.image.src = "./wintertileset/png/Object/Crate.png";
   }
   draw(context) {
-    context.drawImage(
-      this.image,
-      this.x - this.radius,
-      this.y - this.radius,
-      this.radius * 2,
-      this.radius * 2
-    );
+    context.beginPath();
+    context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    context.fillStyle = "white";
+    context.fill();
   }
   update() {
     this.x += this.vx;
