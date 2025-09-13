@@ -6,11 +6,10 @@ export default class Paddle {
     this.x = this.game.width * 0.5 - this.width * 0.5;
     this.y = this.game.height - 20 - this.height;
     this.speed = 10;
-    this.image = new Image();
-    this.image.src = "./wintertileset/png/Object/IceBox.png";
   }
   draw(context) {
-    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    context.fillStyle = "white";
+    context.fillRect(this.x, this.y, this.width, this.height);
   }
   update() {
     if (this.game.keys.indexOf("ArrowLeft") > -1) this.x -= this.speed;
