@@ -6,6 +6,11 @@ export default class Paddle {
     this.x = this.game.width * 0.5 - this.width * 0.5;
     this.y = this.game.height - 20 - this.height;
     this.speed = 10;
+    this.game.canvas.addEventListener("mousemove", (e) => {
+    const rect = this.game.canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    this.x = mouseX - this.width * 0.5;
+    });
   }
   draw(context) {
     context.fillStyle = "white";
@@ -14,11 +19,7 @@ export default class Paddle {
   update() {
     if (this.game.keys.indexOf("ArrowLeft") > -1) this.x -= this.speed;
     if (this.game.keys.indexOf("ArrowRight") > -1) this.x += this.speed;
-    this.game.canvas.addEventListener("mousemove", (e) => {
-      const rect = this.game.canvas.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      this.x = mouseX - this.width * 0.5;
-    });
+
     if (this.x < 0) this.x = 0;
     else if (this.x > this.game.width - this.width)
       this.x = this.game.width - this.width;
