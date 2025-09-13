@@ -1,4 +1,10 @@
 import Game from "./Game.js";
+import { startGame } from "./menu.js";
+
+window.addEventListener("DOMContentLoaded", () => {
+  const startButton = document.getElementById("startBtn");
+  startButton.addEventListener("click", startGame);
+});
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas");
@@ -10,6 +16,7 @@ window.addEventListener("load", () => {
   window.addEventListener("keydown", (e) => {
     if (e.key === "Enter") game.started = true;
   });
+
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.render(ctx);
@@ -17,3 +24,5 @@ window.addEventListener("load", () => {
   }
   animate();
 });
+
+console.log(menu, start);
