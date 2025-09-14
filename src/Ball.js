@@ -1,7 +1,7 @@
 export default class Ball {
   constructor(game) {
     this.game = game;
-    this.radius = 30;
+    this.radius = 10;
     this.x = this.game.width * 0.5;
     this.y = this.game.height * 0.5;
     this.speed = 4;
