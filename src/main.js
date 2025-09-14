@@ -26,6 +26,7 @@ window.addEventListener("load", () => {
     if (!btn) return;
     btn.addEventListener("click", () => {
       game.difficulty = i + 1; // 1,2,3 if you need it later
+      game.initializeBricks();
       document.getElementById("difficulty-menu").style.display = "none";
       document.getElementById("canvas").style.display = "block";
       game.started = true;
