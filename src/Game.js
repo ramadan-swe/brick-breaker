@@ -46,7 +46,7 @@ export default class Game {
 
     // Based on difficulty, determine rows, cols, and total bricks count
     const rows = 3 + this.difficulty; // for example
-    const cols = 2 + this.difficulty * 2; // for example
+    const cols = this.difficulty * 4; // for example
     const totalBricks = rows * cols * 0.75; // 75% of total positions randomly filled
 
     // Create a grid filled with false, indicating no brick
