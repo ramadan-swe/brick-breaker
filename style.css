@@ -42,8 +42,7 @@ html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: url(./wintertileset/png/BG/BG.png) center center/ cover no-repeat
-    fixed;
+  background: url(./assets/xChy58V.png) center center/ cover no-repeat fixed;
   display: none;
   z-index: 200;
 }

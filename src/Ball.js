@@ -36,10 +36,19 @@ export default class Ball {
       this.y = paddle.y - this.radius;
     }
     if (this.y - this.radius > this.game.height) {
-      this.game.started = false;
       this.x = this.game.width * 0.5;
       this.y = this.game.height * 0.5;
       paddle.x = this.game.width * 0.5 - paddle.width * 0.5;
+      this.game.lives -= 1;
+      if (this.game.lives <= 0) {
+        alert("Game Over! Your score: " + this.game.score);
+        this.game.lives = 3;
+        this.game.score = 0;
+        this.game.difficulty = 1;
+        this.game.paddle.width = 250;
+        this.game.extraBalls = [];
+        this.game.started = false;
+      }
     }
   }
 }

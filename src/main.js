@@ -9,9 +9,14 @@ window.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  canvas.width = 800;
-  canvas.height = 600;
+  canvas.width = 900;
+  canvas.height = canvas.width * 0.8;
   const game = new Game(canvas);
+
+  // Test: drop a powerup every 3 seconds
+  setInterval(() => {
+    if (game.started) game.spawnPowerup();
+  }, 3000);
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Enter") game.started = true;
@@ -24,5 +29,3 @@ window.addEventListener("load", () => {
   }
   animate();
 });
-
-console.log(menu, start);
