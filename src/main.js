@@ -1,9 +1,12 @@
 import Game from "./Game.js";
-import { startGame } from "./menu.js";
+import { startGame, chooseDifficultyLevel } from "./menu.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   const startButton = document.getElementById("startBtn");
   startButton.addEventListener("click", startGame);
+
+  const difficultyBtn = document.getElementById("difficulty");
+  difficultyBtn.addEventListener("click", chooseDifficultyLevel);
 });
 
 window.addEventListener("load", () => {
@@ -22,6 +25,17 @@ window.addEventListener("load", () => {
     if (e.key === "Enter") game.started = true;
   });
 
+  ["Easy", "Medium", "Hard"].forEach((id, i) => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      game.difficulty = i + 1; // 1,2,3 if you need it later
+      document.getElementById("difficulty-menu").style.display = "none";
+      document.getElementById("canvas").style.display = "block";
+      game.started = true;
+    });
+  });
+
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.render(ctx);
@@ -29,3 +43,6 @@ window.addEventListener("load", () => {
   }
   animate();
 });
+
+//
+// difficultyBtn.addEventListener("click",chooseDifficultyLevel)

@@ -47,7 +47,7 @@ html {
   z-index: 200;
 }
 
-#menu {
+#main-menu, #difficulty-menu {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -62,13 +62,13 @@ html {
   letter-spacing: 4px;
 }
 
-#menu h1 {
+#main-menu h1, #difficulty-menu h1 {
   margin-bottom: 10px;
   font-size: 6.5em;
   color: #e0e8ff; /* soft light blue */
 }
 
-#menu div {
+#main-menu div, #difficulty-menu div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -76,7 +76,7 @@ html {
   gap: 10px;
 }
 
-#menu button {
+#main-menu button, #difficulty-menu button {
   width: 100%;
   max-width: 60%;
   background: #3a6ea5; /* deep blue */
@@ -93,19 +93,24 @@ html {
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
-#menu button:hover,
-#menu button:focus {
+#main-menu button:hover,
+#main-menu button:focus,
+#difficulty-menu button:hover,
+#difficulty-menu button:focus{
   background: #5d92e7; /* darker blue */
   box-shadow: inset -6px -6px 0px 0px #19335c;
   animation: bounce 0.6s ease-in-out infinite;
 }
 
-#menu button:active {
+#main-menu button:active,
+#difficulty-menu button:active {
   box-shadow: inset 4px 4px 0px 0px #19335c;
 }
 
-#menu button::after,
-#menu button::before {
+#main-menu button::after,
+#main-menu button::before,
+#difficulty-menu button::after,
+#difficulty-menu button::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -113,14 +118,16 @@ html {
   box-sizing: content-box;
 }
 
-#menu button::before {
+#main-menu button::before,
+#difficulty-menu button::before {
   top: -6px;
   left: 0;
   border-top: 6px rgba(60, 90, 150, 0.5) solid;
   border-bottom: 6px rgba(60, 90, 150, 0.5) solid;
 }
 
-#menu button::after {
+#main-menu button::after,
+#difficulty-menu button::after {
   left: -6px;
   top: 0;
   border-left: 6px rgba(60, 90, 150, 0.5) solid;
