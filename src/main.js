@@ -21,10 +21,6 @@ window.addEventListener("load", () => {
     if (game.started) game.spawnPowerup();
   }, 3000);
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") game.started = true;
-  });
-
   ["Easy", "Medium", "Hard"].forEach((id, i) => {
     const btn = document.getElementById(id);
     if (!btn) return;
