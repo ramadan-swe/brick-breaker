@@ -1,5 +1,6 @@
 import Paddle from "./Paddle.js";
 import Ball from "./Ball.js";
+import Brick from "./Brick.js";
 
 export default class Game {
   constructor(canvas) {
@@ -13,6 +14,10 @@ export default class Game {
     this.difficulty = 1;
     this.score = 0;
     this.lives = 3;
+
+    this.bricks = [];
+    this.initializeBricks();
+
     window.addEventListener("keydown", (e) => {
       if (!this.started) return;
       if (this.keys.indexOf(e.key) === -1) this.keys.push(e.key);
@@ -23,6 +28,42 @@ export default class Game {
       if (index > -1) this.keys.splice(index, 1);
     });
   }
+
+  initializeBricks() {
+    this.bricks = [];
+
+    // Based on difficulty, determine rows, cols, and total bricks count
+    const rows = 3 + this.difficulty; // for example
+    const cols = 2 + this.difficulty * 2; // for example
+    const totalBricks = rows * cols * 0.75; // 75% of total positions randomly filled
+
+    // Create a grid filled with false, indicating no brick
+    const grid = new Array(rows).fill(null).map(() => new Array(cols).fill(false));
+
+    // Randomly select positions to place bricks
+    let bricksPlaced = 0;
+    while (bricksPlaced < totalBricks) {
+      const r = Math.floor(Math.random() * rows);
+      const c = Math.floor(Math.random() * cols);
+      if (!grid[r][c]) {
+        grid[r][c] = true;
+        bricksPlaced++;
+      }
+    }
+
+    // Create bricks and set their positions
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (grid[r][c]) {
+          const brick = new Brick(this);
+          brick.x = c * (brick.width + brick.padding) + brick.offsetLeft;
+          brick.y = r * (brick.height + brick.padding) + brick.offsetTop;
+          this.bricks.push(brick);
+        }
+      }
+    }
+  }
+
   render(context) {
     if (!this.started) {
       context.fillStyle = "rgba(0,0,0,0.5)";
@@ -37,9 +78,17 @@ export default class Game {
       );
       return;
     }
+
     this.paddle.draw(context);
     this.paddle.update();
     this.ball.draw(context);
     this.ball.update();
+
+    // Draw bricks
+    this.bricks.forEach((brick) => {
+      brick.draw(context);
+      brick.update();
+    });
+
   }
 }
