@@ -219,3 +219,18 @@ html {
   cursor: pointer;
   animation: neonSpin 3s infinite linear, colorShift 4s infinite alternate;
 }
+#main-menu input[type="text"] {
+  font-size: 1.2em;
+  padding: 40px 16px;
+  margin-bottom: 18px;
+  min-width: 308px;
+  border: 2px solid #3a6ea5;
+  border-radius: 8px;
+  outline: none;
+  background: #e0e8ff;
+  color: #19335c;
+  box-shadow: 0 2px 8px rgba(60, 90, 150, 0.08);
+  transition: border 0.2s, box-shadow 0.2s;
+  text-align: center;
+  font-family: "Pixelify", sans-serif;
+}

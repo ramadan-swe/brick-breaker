@@ -11,6 +11,15 @@ import {
 function startGame() {
   const canvas = document.getElementById("canvas");
   const menu = document.getElementById("main-menu");
+  const nameInput = document.getElementById("playerName");
+  const playerName = nameInput.value.trim();
+  if (!playerName) {
+    nameInput.style.border = "2px solid red";
+    nameInput.placeholder = "Please enter your name!";
+    nameInput.focus();
+    return;
+  }
+  nameInput.style.border = ""; // reset border if valid
   canvas.style.display = "block";
   menu.style.display = "none";
 }
@@ -18,6 +27,14 @@ function startGame() {
 function chooseDifficultyLevel() {
   const mainMenu = document.getElementById("main-menu");
   const diffMenu = document.getElementById("difficulty-menu");
+  const nameInput = document.getElementById("playerName");
+  const playerName = nameInput.value.trim();
+  if (!playerName) {
+    nameInput.style.border = "2px solid red";
+    nameInput.placeholder = "Please enter your name!";
+    nameInput.focus();
+    return;
+  }
   mainMenu.style.display = "none";
   diffMenu.style.display = "flex";
 }
