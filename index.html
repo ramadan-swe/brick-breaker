@@ -15,7 +15,7 @@
       <div>
         <button id="startBtn">Start Game</button>
         <button id="difficulty">Select Difficulty</button>
-        <button id="theme">Setting</button>
+        <button id="SettingBtn">Setting</button>
       </div>
     </div>
     <!-- difficulty menu -->
@@ -27,10 +27,37 @@
         <button id="Easy">Easy</button>
         <button id="Medium">Medium</button>
         <button id="Hard">Hard</button>
+        <button id="Back">Back</button>
       </div>
     </div>
     <!-- Setting menu -->
+    <div id="setting-menu" style="display: none">
+      <div>
+        <h1>Setting</h1>
+      </div>
+      <div>
+        <div id="Music">
+          <input
+            type="range"
+            id="MusicVolume"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.5"
+          />
+          <div>
+            <button id="PrevMusic">Prev Music</button>
+            <button id="NextMusic">Next Music</button>
+
+            <button id="MuteMusic">Mute</button>
+            <span id="MusicName"></span>
+          </div>
+        </div>
+        <button id="Theme">Theme</button>
+        <button id="Back">Back</button>
+      </div>
+    </div>
     <canvas id="canvas"></canvas>
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

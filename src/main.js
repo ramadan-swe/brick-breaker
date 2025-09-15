@@ -1,13 +1,5 @@
 import Game from "./Game.js";
-import { startGame, chooseDifficultyLevel } from "./menu.js";
-
-window.addEventListener("DOMContentLoaded", () => {
-  const startButton = document.getElementById("startBtn");
-  startButton.addEventListener("click", startGame);
-
-  const difficultyBtn = document.getElementById("difficulty");
-  difficultyBtn.addEventListener("click", chooseDifficultyLevel);
-});
+import { startGame, chooseDifficultyLevel, SettingMenu } from "./menu.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas");
