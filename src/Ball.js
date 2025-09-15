@@ -35,6 +35,21 @@ export default class Ball {
       this.vx = (hitPos - 0.5) * 2 * this.speed;
       this.y = paddle.y - this.radius;
     }
+    this.game.bricks.forEach((brick) => {
+      if (!brick.broken) {
+        if (
+          this.x > brick.x &&
+          this.x < brick.x + brick.width &&
+          this.y - this.radius < brick.y + brick.height &&
+          this.y + this.radius > brick.y
+        ) {
+          // Ball hits brick
+          this.vy *= -1;
+          brick.broken = true;
+          this.game.score += 10;
+        }
+      }
+    });
     if (this.y - this.radius > this.game.height) {
       this.x = this.game.width * 0.5;
       this.y = this.game.height * 0.5;

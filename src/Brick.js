@@ -27,12 +27,19 @@ class Brick {
   update() {
     // console.log(this.ball);
     if (this.detectCollision(this, this.ball)) {
-      this.broken = true; // "destroy" the brick
-      this.ball.vy = -this.ball.vy; // simple response: reverse vertical direction
+     // this.broken = true; // "destroy" the brick
+      // this.ball.vy = -this.ball.vy; // simple response: reverse vertical direction
     }
   }
   detectCollision() {
     // To be implmented
+    if (this.ball.x > this.x && this.ball.x < this.x + this.width && this.ball.y > this.y && this.ball.y < this.y + this.height) {
+          // Ball hits brick
+          this.ball.vy *= -1;
+          this.broken = true;
+          this.game.score += 10;
+          return true;
+    }
     return false;
   }
 }
