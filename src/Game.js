@@ -1,5 +1,7 @@
 import Paddle from "./Paddle.js";
 import Ball from "./Ball.js";
+import Brick from "./Brick.js";
+import Powerup from "./powerup.js";
 
 export default class Game {
   constructor(canvas) {
@@ -8,8 +10,9 @@ export default class Game {
     this.height = this.canvas.height;
     this.paddle = new Paddle(this);
     this.ball = new Ball(this);
+    this.powerups = [];
     this.keys = [];
-    this.started = false;
+    this.started = true;
     this.difficulty = 1;
     this.score = 0;
     this.lives = 3;
@@ -109,19 +112,13 @@ export default class Game {
   }
 
   render(context) {
-    if (!this.started) {
-      context.fillStyle = "rgba(0,0,0,0.5)";
-      context.fillRect(0, 0, this.width, this.height);
-      context.font = "30px Arial";
-      context.fillStyle = "white";
-      context.textAlign = "center";
-      context.fillText(
-        "Press Enter to Start",
-        this.width * 0.5,
-        this.height * 0.5
-      );
-      return;
-    }
+    // Draw score and lives
+    context.fillStyle = "white";
+    context.font = "20px Pixelify";
+    context.fillText("Score: " + this.score, 20, 30);
+    context.fillText("Lives: " + this.lives, this.width - 100, 30);
+
+    // Draw and update paddle
     this.paddle.draw(context);
     this.paddle.update();
     this.ball.draw(context);

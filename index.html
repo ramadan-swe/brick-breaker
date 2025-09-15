@@ -13,12 +13,25 @@
         <h1>Brick Breaker</h1>
       </div>
       <div>
+        <input
+          id="playerName"
+          type="text"
+          placeholder="Enter your name"
+          required
+          style="
+            font-size: 1.2em;
+            padding: 10px;
+            margin-bottom: 15px;
+            width: 260px;
+          "
+        />
         <button id="startBtn">Start Game</button>
         <button id="difficulty">Select Difficulty</button>
-        <button id="theme">Theme</button>
+        <button id="SettingBtn">Setting</button>
       </div>
     </div>
-      <div id="difficulty-menu" style="display:none">
+    <!-- difficulty menu -->
+    <div id="difficulty-menu" style="display: none">
       <div>
         <h1>Select Difficulty</h1>
       </div>
@@ -26,9 +39,37 @@
         <button id="Easy">Easy</button>
         <button id="Medium">Medium</button>
         <button id="Hard">Hard</button>
+        <button id="Back">Back</button>
+      </div>
+    </div>
+    <!-- Setting menu -->
+    <div id="setting-menu" style="display: none">
+      <div>
+        <h1>Setting</h1>
+      </div>
+      <div>
+        <div id="Music">
+          <input
+            type="range"
+            id="MusicVolume"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.5"
+          />
+          <div>
+            <button id="PrevMusic">Prev Music</button>
+            <button id="NextMusic">Next Music</button>
+
+            <button id="MuteMusic">Mute</button>
+            <span id="MusicName"></span>
+          </div>
+        </div>
+        <button id="Theme">Theme</button>
+        <button id="Back">Back</button>
       </div>
     </div>
     <canvas id="canvas"></canvas>
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

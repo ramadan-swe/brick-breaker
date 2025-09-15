@@ -7,18 +7,34 @@ import {
   setVolume,
   muteMusic,
 } from "./Music.js";
-import { Game } from "./Game.js"
 //function hides the main menu to start the game
 function startGame() {
   const canvas = document.getElementById("canvas");
   const menu = document.getElementById("main-menu");
+  const nameInput = document.getElementById("playerName");
+  const playerName = nameInput.value.trim();
+  if (!playerName) {
+    nameInput.style.border = "2px solid red";
+    nameInput.placeholder = "Please enter your name!";
+    nameInput.focus();
+    return;
+  }
+  nameInput.style.border = ""; // reset border if valid
   canvas.style.display = "block";
   menu.style.display = "none";
 }
 
-function chooseDifficultyLevel(){
+function chooseDifficultyLevel() {
   const mainMenu = document.getElementById("main-menu");
   const diffMenu = document.getElementById("difficulty-menu");
+  const nameInput = document.getElementById("playerName");
+  const playerName = nameInput.value.trim();
+  if (!playerName) {
+    nameInput.style.border = "2px solid red";
+    nameInput.placeholder = "Please enter your name!";
+    nameInput.focus();
+    return;
+  }
   mainMenu.style.display = "none";
   diffMenu.style.display = "flex";
 }
@@ -49,7 +65,6 @@ window.addEventListener("DOMContentLoaded", () => {
       document.getElementById("main-menu").style.display = "flex";
     });
   });
-
   // Music controls
   const volumeSlider = document.getElementById("MusicVolume");
   if (volumeSlider) {
@@ -78,7 +93,6 @@ window.addEventListener("DOMContentLoaded", () => {
   playMusic(0);
 });
 
-
-
 export { startGame };
 export { chooseDifficultyLevel };
+export { SettingMenu };
