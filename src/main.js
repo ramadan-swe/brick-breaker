@@ -14,9 +14,9 @@ window.addEventListener("load", () => {
   }, 3000);
   
   window.addEventListener("keydown", (e) =>{
-    if(e.key === "Space") game.startPlaying();
+    if(e.code === "Space") game.startPlaying();
   });
-  
+
   ["Easy", "Medium", "Hard"].forEach((id, i) => {
     const btn = document.getElementById(id);
     if (!btn) return;

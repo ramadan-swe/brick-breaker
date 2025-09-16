@@ -36,7 +36,7 @@ export default class Game {
           return;
         }
       }
-      if(this.phase="gameOver"){
+      if(this.phase == "gameOver"){
         if(e.code === "Space"){
           this.restart();
           return;
@@ -115,8 +115,9 @@ export default class Game {
     // Draw score and lives
     context.fillStyle = "white";
     context.font = "20px Pixelify";
-    context.fillText("Score: " + this.score, 20, 30);
+    if(this.phase == "playing" || this.phase == "ready") context.fillText("Score: " + this.score, 20, 30);
     context.fillText("Lives: " + this.lives, this.width - 100, 30);
+    
 
     //in case we are not playing, show:
     if(this.phase != "playing"){
@@ -124,7 +125,7 @@ export default class Game {
       context.fillRect(0,0, this.width, this.height);
       context.textAlign = "center";
       context.fillStyle = "white";
-      context.textFont = "30px Pixelify";
+      context.font = "30px Pixelify";
 
       if(this.phase === "menu"){
         context.fillText("Press space to start", this.width * 0.5, this.height * 0.5 );
@@ -133,35 +134,45 @@ export default class Game {
 
       if(this.phase === "win"){
         //place you win in the middle of the screen
-        context.fillText = ("🎉 You Win!", this.width * 0.5, this.height * 0.5);
+        context.font = "30px Pixelify";
+        context.fillText("🎉 You Win!", this.width * 0.5, this.height * 0.5);
         //press Space to continue
-        context.Textfont = "20px Pixelify";
+        context.font = "20px Pixelify";
         context.fillText("Press space to continue to next level", this.width * 0.5, this.height - 40);
         //Press esc to exit
-        context.textAlign = "right";
-        context.Textfont = "20px Pixelify";
+        context.textAlign = "left";
+        context.font = "20px Pixelify";
         context.fillText("Press esc to exit", 10, 30);
       }
-
         if(this.phase === "gameOver"){
         //place you win in the middle of the screen
-        context.fillText = ("💀 Game Over!", this.width * 0.5, this.height * 0.5);
+        context.textAlign = "center";
+        context.font = "30px Pixelify";
+        context.fillText("💀 Game Over!", this.width * 0.5, this.height * 0.5);
         //press Space to continue
-        context.Textfont = "20px Pixelify";
+        context.font = "20px Pixelify";
         context.fillText("Press space to restart", this.width * 0.5, this.height - 40);
         //Press esc to exit
-        context.textAlign = "right";
-        context.Textfont = "20px Pixelify";
+        context.textAlign = "left";
+        context.font = "20px Pixelify";
         context.fillText("Press esc to exit", 10, 30);
+      }
+      if(this.phase == "ready"){
+        context.textAlign = "center";
+        context.font = "20px Pixelify";
+        context.fillText("Press space to continue", this.width * 0.5, this.height * 0.5 );
       }
     }
     // Draw and update paddle
     //Eman: switched update with draw
-    this.paddle.update();
-    this.paddle.draw(context);
     
-    this.ball.update();
+    if(this.started){
+      this.ball.update();
+      this.paddle.update();
+    } 
+
     this.ball.draw(context);
+    this.paddle.draw(context);
     // Draw bricks
     this.drawBricks(context)
 
@@ -170,13 +181,13 @@ export default class Game {
     );
     this.extraBalls.forEach((ball) => {
       ball.draw(context);
-      ball.update();
+      if(this.started) ball.update();
     });
 
     // Draw and update powerups
     this.powerups = this.powerups.filter((p) => p.active);
     this.powerups.forEach((p) => {
-      p.update();
+      if (this.started) p.update();
       p.draw(context);
     });
 
@@ -194,8 +205,8 @@ export default class Game {
     //putting everything in the very center 
     this.paddle.x = this.width * 0.5 - this.paddle.width * 0.5;
     this.paddle.y = this.height - 20 - this.paddle.height;
-    this.ball.x = this.width * 0.5;
-    this.ball.y = this.height * 0.5;
+    this.ball.x = this.paddle.x + this.paddle.width * 0.5;
+    this.ball.y = this.paddle.y - this.ball.radius;
     //velocity along the x and y axis
     this.ball.vx = 1 * this.ball.speed;
     this.ball.vy = 2 * this.ball.speed;
