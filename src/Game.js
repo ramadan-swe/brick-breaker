@@ -118,12 +118,50 @@ export default class Game {
     context.fillText("Score: " + this.score, 20, 30);
     context.fillText("Lives: " + this.lives, this.width - 100, 30);
 
-    // Draw and update paddle
-    this.paddle.draw(context);
-    this.paddle.update();
-    this.ball.draw(context);
-    this.ball.update();
+    //in case we are not playing, show:
+    if(this.phase != "playing"){
+      context.fillStyle = "rgba(0,0,0,0.5)"; //give it a dim
+      context.fillRect(0,0, this.width, this.height);
+      context.textAlign = "center";
+      context.fillStyle = "white";
+      context.textFont = "30px Pixelify";
 
+      if(this.phase === "menu"){
+        context.fillText("Press space to start", this.width * 0.5, this.height * 0.5 );
+        return;
+      }
+
+      if(this.phase === "win"){
+        //place you win in the middle of the screen
+        context.fillText = ("🎉 You Win!", this.width * 0.5, this.height * 0.5);
+        //press Space to continue
+        context.Textfont = "20px Pixelify";
+        context.fillText("Press space to continue to next level", this.width * 0.5, this.height - 40);
+        //Press esc to exit
+        context.textAlign = "right";
+        context.Textfont = "20px Pixelify";
+        context.fillText("Press esc to exit", 10, 30);
+      }
+
+        if(this.phase === "gameOver"){
+        //place you win in the middle of the screen
+        context.fillText = ("💀 Game Over!", this.width * 0.5, this.height * 0.5);
+        //press Space to continue
+        context.Textfont = "20px Pixelify";
+        context.fillText("Press space to restart", this.width * 0.5, this.height - 40);
+        //Press esc to exit
+        context.textAlign = "right";
+        context.Textfont = "20px Pixelify";
+        context.fillText("Press esc to exit", 10, 30);
+      }
+    }
+    // Draw and update paddle
+    //Eman: switched update with draw
+    this.paddle.update();
+    this.paddle.draw(context);
+    
+    this.ball.update();
+    this.ball.draw(context);
     // Draw bricks
     this.drawBricks(context)
 
@@ -141,6 +179,15 @@ export default class Game {
       p.update();
       p.draw(context);
     });
+
+    //win condition
+    if(this.bricks && this.bricks.length){
+      const bricksLeft = this.bricks.some(b => !b.broken);
+      if(!bricksLeft){
+        this.phase = "win";
+        this.started = false;
+      }
+    }
   }
   //center paddle and ball at the reset position
   resetPositions(){

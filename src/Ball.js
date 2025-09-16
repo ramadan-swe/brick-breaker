@@ -51,16 +51,18 @@ export default class Ball {
       }
     });
     if (this.y - this.radius > this.game.height) {
-      this.x = this.game.width * 0.5;
-      this.y = this.game.height * 0.5;
-      paddle.x = this.game.width * 0.5 - paddle.width * 0.5;
       this.game.lives -= 1;
+
       if (this.game.lives <= 0) {
-        this.game.lives = 3;
-        this.game.score = 0;
-        this.game.difficulty = 1;
-        this.game.paddle.width = 250;
+        //Eman: used helper function in game.js
+        //to stop the game and print gameover
+        this.game.phase = "gameOver";
+        this.game.started = false
         this.game.extraBalls = [];
+      }
+      else{ //if u have lives left
+        this.game.started = false;
+        this.game.resetPositions();
       }
     }
   }

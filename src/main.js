@@ -12,7 +12,11 @@ window.addEventListener("load", () => {
   setInterval(() => {
     if (game.started) game.spawnPowerup();
   }, 3000);
-
+  
+  window.addEventListener("keydown", (e) =>{
+    if(e.key === "Space") game.startPlaying();
+  });
+  
   ["Easy", "Medium", "Hard"].forEach((id, i) => {
     const btn = document.getElementById(id);
     if (!btn) return;
@@ -21,7 +25,7 @@ window.addEventListener("load", () => {
       game.initializeBricks();
       document.getElementById("difficulty-menu").style.display = "none";
       document.getElementById("canvas").style.display = "block";
-      game.started = true;
+      game.startPlaying();
     });
   });
 
@@ -32,6 +36,3 @@ window.addEventListener("load", () => {
   }
   animate();
 });
-
-//
-// difficultyBtn.addEventListener("click",chooseDifficultyLevel)
