@@ -35,6 +35,8 @@ export default class Ball {
       this.vx = (hitPos - 0.5) * 2 * this.speed;
       this.y = paddle.y - this.radius;
     }
+
+    // original breaking bricks loop 
     this.game.bricks.forEach((brick) => {
       if (!brick.broken) {
         if (
@@ -50,17 +52,42 @@ export default class Ball {
         }
       }
     });
+    //Eman's loop: Broken(Not working)
+    // for (let i = 0; i < this.game.bricks.length; i++) {
+    //   const brick = this.game.bricks[i];
+    //   if (brick.broken) continue;
+    //   const hit =
+    //     this.x + this.radius > brick.x &&
+    //     this.x - this.radius < brick.x + brick.width &&
+    //     this.y + this.radius > brick.y &&
+    //     this.y - this.radius < brick.y + brick.height;
+    //   if (hit) {
+    //     // resolve overlap vertically, then bounce
+    //     if (this.vy > 0) {
+    //       this.y = brick.y - this.radius;
+    //     } else {
+    //       this.y = brick.y + brick.height + this.radius;
+    //     }
+    //     this.vy *= -1;
+    //     brick.broken = true;
+    //     this.game.score += 10;
+    //     break; // <= prevents clearing multiple bricks in one frame
+    //   }
+    // }
+
     if (this.y - this.radius > this.game.height) {
-      this.x = this.game.width * 0.5;
-      this.y = this.game.height * 0.5;
-      paddle.x = this.game.width * 0.5 - paddle.width * 0.5;
       this.game.lives -= 1;
+
       if (this.game.lives <= 0) {
-        this.game.lives = 3;
-        this.game.score = 0;
-        this.game.difficulty = 1;
-        this.game.paddle.width = 250;
+        //Eman: used helper function in game.js
+        //to stop the game and print gameover
+        this.game.phase = "gameOver";
+        this.game.started = false;
         this.game.extraBalls = [];
+      } else{ //if u have lives left
+        this.game.started = false;
+        this.game.resetPositions();
+        this.game.phase = "ready";
       }
     }
   }

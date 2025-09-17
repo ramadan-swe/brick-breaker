@@ -7,6 +7,7 @@ export default class Paddle {
     this.y = this.game.height - 20 - this.height;
     this.speed = 10;
     this.game.canvas.addEventListener("mousemove", (e) => {
+    if (!this.game.started) return;
     const rect = this.game.canvas.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     this.x = mouseX - this.width * 0.5;

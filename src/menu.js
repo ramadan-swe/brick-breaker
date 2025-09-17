@@ -49,7 +49,7 @@ function SettingMenu() {
 
 window.addEventListener("DOMContentLoaded", () => {
   const startButton = document.getElementById("startBtn");
-  startButton.addEventListener("click", startGame);
+  startButton.addEventListener("click", (startGame));
 
   const difficultyBtn = document.getElementById("difficulty");
   difficultyBtn.addEventListener("click", chooseDifficultyLevel);
