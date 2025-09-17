@@ -16,10 +16,8 @@ export default class Game {
     this.difficulty = 1;
     this.score = 0;
     this.lives = 3;
-
     this.bricks = [];
     this.initializeBricks();
-
     this.extraBalls = [];
 
     window.addEventListener("keydown", (e) => {
