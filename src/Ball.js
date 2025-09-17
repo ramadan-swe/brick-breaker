@@ -4,7 +4,7 @@ export default class Ball {
     this.radius = 10;
     this.x = this.game.width * 0.5;
     this.y = this.game.height * 0.5;
-    this.speed = 4;
+    this.speed = 3;
     this.vx = 1 * this.speed;
     this.vy = 2 * this.speed;
   }
@@ -20,15 +20,15 @@ export default class Ball {
     if (this.x - this.radius < 0 || this.x + this.radius > this.game.width) {
       this.vx *= -1;
     }
-    if (this.y - this.radius < 0) {
+    if (this.ballTop < 0) {
       this.vy *= -1;
     }
     const paddle = this.game.paddle;
     if (
-      this.y + this.radius > paddle.y &&
+      this.ballBottom > paddle.y &&
       this.x > paddle.x &&
       this.x < paddle.x + paddle.width &&
-      this.y - this.radius < paddle.y + paddle.height
+      this.ballTop < paddle.y + paddle.height
     ) {
       this.vy *= -1;
       const hitPos = (this.x - paddle.x) / paddle.width;
@@ -36,46 +36,7 @@ export default class Ball {
       this.y = paddle.y - this.radius;
     }
 
-    // original breaking bricks loop 
-    this.game.bricks.forEach((brick) => {
-      if (!brick.broken) {
-        if (
-          this.x > brick.x &&
-          this.x < brick.x + brick.width &&
-          this.y - this.radius < brick.y + brick.height &&
-          this.y + this.radius > brick.y
-        ) {
-          // Ball hits brick
-          this.vy *= -1;
-          brick.broken = true;
-          this.game.score += 10;
-        }
-      }
-    });
-    //Eman's loop: Broken(Not working)
-    // for (let i = 0; i < this.game.bricks.length; i++) {
-    //   const brick = this.game.bricks[i];
-    //   if (brick.broken) continue;
-    //   const hit =
-    //     this.x + this.radius > brick.x &&
-    //     this.x - this.radius < brick.x + brick.width &&
-    //     this.y + this.radius > brick.y &&
-    //     this.y - this.radius < brick.y + brick.height;
-    //   if (hit) {
-    //     // resolve overlap vertically, then bounce
-    //     if (this.vy > 0) {
-    //       this.y = brick.y - this.radius;
-    //     } else {
-    //       this.y = brick.y + brick.height + this.radius;
-    //     }
-    //     this.vy *= -1;
-    //     brick.broken = true;
-    //     this.game.score += 10;
-    //     break; // <= prevents clearing multiple bricks in one frame
-    //   }
-    // }
-
-    if (this.y - this.radius > this.game.height) {
+    if (this.ballTop > this.game.height) {
       this.game.lives -= 1;
 
       if (this.game.lives <= 0) {
@@ -91,4 +52,6 @@ export default class Ball {
       }
     }
   }
+  get ballBottom() {return this.y + this.radius}
+  get ballTop() {return this.y - this.radius}
 }

@@ -1,8 +1,8 @@
 export default class Powerup {
-  constructor(game) {
+  constructor(game, x, y) {
     this.game = game;
-    this.x = Math.random() * (this.game.width - 20);
-    this.y = -20;
+    this.x = x;
+    this.y = y;
     this.type = "expand"; // e.g., 'expand', 'shrink', 'extraLife'
     this.width = 20;
     this.height = 20;

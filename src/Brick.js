@@ -25,28 +25,29 @@ class Brick {
     }
   }
   update() {
-    // console.log(this.ball);
-    if (this.detectCollision(this, this.ball)) {
-      // this.broken = true; // "destroy" the brick
-      // this.ball.vy = -this.ball.vy; // simple response: reverse vertical direction
+    if (!this.broken && this.detectCollision(this, this.ball)) {
+      this.broken = true; // brick got destroyed
+      this.ball.vy = -this.ball.vy; // reverse vertical direction
+      this.game.score += 10;
+      // spawn powerup with ball position
+      this.game.spawnPowerup(this.ball.x, this.ball.y);
     }
   }
   detectCollision() {
-    // To be implmented
     if (
       this.ball.x > this.x &&
-      this.ball.x < this.x + this.width &&
-      this.ball.y > this.y &&
-      this.ball.y < this.y + this.height
+      this.ball.x < this.brickRight &&
+      this.ball.ballTop < this.brickBottom &&
+      this.ball.ballBottom > this.y
     ) {
       // Ball hits brick
-      this.ball.vy *= -1;
-      this.broken = true;
-      this.game.score += 10;
       return true;
     }
     return false;
   }
+
+  get brickRight() { return this.x + this.width }
+  get brickBottom() { return this.y + this.height }
 }
 
 export default Brick;

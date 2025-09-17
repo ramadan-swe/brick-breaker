@@ -57,11 +57,11 @@ export default class Game {
       if (index > -1) this.keys.splice(index, 1);
     });
   }
-  spawnPowerup() {
+  spawnPowerup(x, y) {
     // Randomly choose a type
     const types = ["expand", "shrink", "extraLife", "multiBall"];
     const type = types[Math.floor(Math.random() * types.length)];
-    const powerup = new Powerup(this);
+    const powerup = new Powerup(this, x, y);
     powerup.type = type;
     this.powerups.push(powerup);
   }
@@ -71,8 +71,8 @@ export default class Game {
 
     // Based on difficulty, determine rows, cols, and total bricks count
     const rows = 3 + this.difficulty; // for example
-    const cols = this.difficulty * 4; // for example
-    const totalBricks = rows * cols * 0.75; // 75% of total positions randomly filled
+    const cols = 10; // for example
+    const totalBricks = rows * cols * 0.66; // 66% of total positions randomly filled
 
     // Create a grid filled with false, indicating no brick
     const grid = new Array(rows)
