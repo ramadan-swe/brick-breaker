@@ -14,11 +14,6 @@ window.addEventListener("load", () => {
   canvas.height = canvas.width * 0.8;
   const game = new Game(canvas);
 
-  // Test: drop a powerup every 3 seconds
-  setInterval(() => {
-    if (game.started) game.spawnPowerup();
-  }, 3000);
-
   window.addEventListener("keydown", (e) => {
     if (e.code === "Space") game.startPlaying();
   });
