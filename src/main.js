@@ -1,5 +1,11 @@
 import Game from "./Game.js";
-import { startGame, chooseDifficultyLevel, SettingMenu } from "./menu.js";
+import {
+  startGame,
+  chooseDifficultyLevel,
+  SettingMenu,
+  positionMuteBtn,
+} from "./menu.js";
+import { playHitSound } from "./Music.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas");
@@ -12,9 +18,9 @@ window.addEventListener("load", () => {
   setInterval(() => {
     if (game.started) game.spawnPowerup();
   }, 3000);
-  
-  window.addEventListener("keydown", (e) =>{
-    if(e.code === "Space") game.startPlaying();
+
+  window.addEventListener("keydown", (e) => {
+    if (e.code === "Space") game.startPlaying();
   });
 
   ["Easy", "Medium", "Hard"].forEach((id, i) => {
@@ -25,7 +31,10 @@ window.addEventListener("load", () => {
       game.initializeBricks();
       document.getElementById("difficulty-menu").style.display = "none";
       document.getElementById("canvas").style.display = "block";
+      document.getElementById("CanvasMuteBtn").style.display = "block";
       game.startPlaying();
+      positionMuteBtn();
+      playHitSound();
     });
   });
 

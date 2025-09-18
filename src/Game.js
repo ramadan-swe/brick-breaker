@@ -2,6 +2,7 @@ import Paddle from "./Paddle.js";
 import Ball from "./Ball.js";
 import Brick from "./Brick.js";
 import Powerup from "./powerup.js";
+import { isGameMuted } from "./Music.js";
 
 export default class Game {
   constructor(canvas) {
@@ -115,7 +116,7 @@ export default class Game {
     context.fillStyle = "white";
     context.font = "20px Pixelify";
     if (this.phase == "playing" || this.phase == "ready")
-      context.fillText("Score: " + this.score, 20, 30);
+      context.fillText("Score: " + this.score, this.width - 100, 60);
     context.fillText("Lives: " + this.lives, this.width - 100, 30);
 
     //in case we are not playing, show:

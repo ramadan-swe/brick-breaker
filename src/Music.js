@@ -12,7 +12,7 @@ const tracks = [
 let currentTrack = 0;
 let audio = new Audio(tracks[currentTrack].src);
 audio.loop = true;
-audio.volume = 0.5;
+audio.volume = 0.1;
 audio.autoplay = true;
 
 function playMusic(index) {
@@ -37,5 +37,32 @@ function muteMusic() {
   audio.muted = !audio.muted;
 }
 
+// Hit sound effect
+
+const hitSound = new Audio("../assets/sounds/startgame.mp3");
+function playHitSound() {
+  hitSound.currentTime = 0;
+  hitSound.play();
+}
+
+// Mute all game sounds
+
+let isGameMuted = false;
+function muteAllGameSounds() {
+  isGameMuted = !isGameMuted;
+  audio.muted = isGameMuted;
+  hitSound.muted = isGameMuted;
+}
+
 // Export functions for use in menu.js
-export { audio, playMusic, nextMusic, prevMusic, setVolume, muteMusic };
+export {
+  audio,
+  playMusic,
+  nextMusic,
+  prevMusic,
+  setVolume,
+  muteMusic,
+  muteAllGameSounds,
+  isGameMuted,
+  playHitSound,
+};

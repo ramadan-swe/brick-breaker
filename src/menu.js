@@ -6,12 +6,41 @@ import {
   prevMusic,
   setVolume,
   muteMusic,
+  muteAllGameSounds,
+  isGameMuted,
+  playHitSound,
 } from "./Music.js";
+
+// Mute button for canvas
+
+const muteBtn = document.getElementById("CanvasMuteBtn");
+function updateMuteIcon() {
+  muteBtn.textContent = isGameMuted ? "🔇" : "🔊";
+}
+if (muteBtn) {
+  muteBtn.addEventListener("click", () => {
+    muteAllGameSounds();
+    updateMuteIcon();
+  });
+  updateMuteIcon();
+}
+
+// function to position the mute button relative to the canvas
+
+function positionMuteBtn() {
+  const canvas = document.getElementById("canvas");
+  const muteBtn = document.getElementById("CanvasMuteBtn");
+  const rect = canvas.getBoundingClientRect();
+  muteBtn.style.left = `${rect.left + 15}px`;
+  muteBtn.style.top = `${rect.top + 5}px`;
+}
+
 //function hides the main menu to start the game
 function startGame() {
   const canvas = document.getElementById("canvas");
   const menu = document.getElementById("main-menu");
   const nameInput = document.getElementById("playerName");
+  const muteBtn = document.getElementById("CanvasMuteBtn");
   const playerName = nameInput.value.trim();
   if (!playerName) {
     nameInput.style.border = "2px solid red";
@@ -22,6 +51,9 @@ function startGame() {
   nameInput.style.border = ""; // reset border if valid
   canvas.style.display = "block";
   menu.style.display = "none";
+  muteBtn.style.display = "block";
+  playHitSound();
+  positionMuteBtn();
 }
 
 function chooseDifficultyLevel() {
@@ -29,6 +61,7 @@ function chooseDifficultyLevel() {
   const diffMenu = document.getElementById("difficulty-menu");
   const nameInput = document.getElementById("playerName");
   const playerName = nameInput.value.trim();
+
   if (!playerName) {
     nameInput.style.border = "2px solid red";
     nameInput.placeholder = "Please enter your name!";
@@ -49,7 +82,7 @@ function SettingMenu() {
 
 window.addEventListener("DOMContentLoaded", () => {
   const startButton = document.getElementById("startBtn");
-  startButton.addEventListener("click", (startGame));
+  startButton.addEventListener("click", startGame);
 
   const difficultyBtn = document.getElementById("difficulty");
   difficultyBtn.addEventListener("click", chooseDifficultyLevel);
@@ -65,6 +98,7 @@ window.addEventListener("DOMContentLoaded", () => {
       document.getElementById("main-menu").style.display = "flex";
     });
   });
+
   // Music controls
   const volumeSlider = document.getElementById("MusicVolume");
   if (volumeSlider) {
@@ -90,9 +124,8 @@ window.addEventListener("DOMContentLoaded", () => {
       prevMusic();
     });
   }
-  playMusic(0);
 });
 
-export { startGame };
-export { chooseDifficultyLevel };
-export { SettingMenu };
+window.addEventListener("resize", positionMuteBtn);
+
+export { startGame, chooseDifficultyLevel, SettingMenu, positionMuteBtn };
