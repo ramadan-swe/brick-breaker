@@ -46,8 +46,12 @@ class Brick {
     return false;
   }
 
-  get brickRight() { return this.x + this.width }
-  get brickBottom() { return this.y + this.height }
+  get brickRight() {
+    return this.x + this.width;
+  }
+  get brickBottom() {
+    return this.y + this.height;
+  }
 }
 
 export default Brick;

@@ -145,12 +145,12 @@ export default class Game {
         context.fillText(
           "Press space to continue to next level",
           this.width * 0.5,
-          this.height - 40
+          this.height * 0.6
         );
         //Press esc to exit
         context.textAlign = "left";
         context.font = "20px Pixelify";
-        context.fillText("Press esc to exit", 10, 30);
+        context.fillText("Press esc to exit", 10, 50);
       }
       if (this.phase === "gameOver") {
         //place you win in the middle of the screen
