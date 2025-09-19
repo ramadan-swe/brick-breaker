@@ -1,3 +1,5 @@
+import Ball from "./Ball.js";
+
 export default class Powerup {
   constructor(game, x, y) {
     this.game = game;
@@ -62,7 +64,8 @@ export default class Powerup {
         break;
       case "multiBall":
         // Add a new ball with random direction
-        const newBall = new this.game.ball.constructor(this.game);
+        // const newBall = new this.game.ball.constructor(this.game);
+        const newBall = new Ball(this.game);
         newBall.x = this.game.ball.x;
         newBall.y = this.game.ball.y;
         newBall.vx = -this.game.ball.vx; // opposite direction
