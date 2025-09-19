@@ -190,15 +190,33 @@ export default class Game {
     this.ball.draw(context);
     this.paddle.draw(context);
     // Draw bricks
-    this.drawBricks(context);
-
+    this.drawBricks(context)
+    //removing the balls that falls under the screen
     this.extraBalls = this.extraBalls.filter(
       (ball) => ball.y - ball.radius < this.height
-    );
+    ); //update & draw extra balls 
     this.extraBalls.forEach((ball) => {
       ball.draw(context);
       if (this.started) ball.update();
     });
+    if(this.phase == "playing"){
+      const activeBalls = [this.ball, ...this.extraBalls].filter(b => b.y - b.radius < this.height);
+      if(activeBalls.length === 0){
+        this.lives -= 1;
+        if(this.lives > 0){
+          this.resetPositions();
+          this.phase = "ready";
+          this.started = false;
+          if(this.ball) this.ball.active = true;
+          this.extraBalls = [];
+      } else{
+          this.phase = "gameOver";
+          this.started = false;
+          this.extraBalls = [];
+        }
+      }
+    }
+
 
     // Draw and update powerups
     this.powerups = this.powerups.filter((p) => p.active);

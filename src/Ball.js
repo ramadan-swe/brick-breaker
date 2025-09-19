@@ -7,6 +7,7 @@ export default class Ball {
     this.speed = 3;
     this.vx = 1 * this.speed;
     this.vy = 2 * this.speed;
+    this.active = true;
   }
   draw(context) {
     context.beginPath();
@@ -15,14 +16,19 @@ export default class Ball {
     context.fill();
   }
   update() {
+    if (!this.active) return;
+    //move
     this.x += this.vx;
     this.y += this.vy;
+    //walls
     if (this.x - this.radius < 0 || this.x + this.radius > this.game.width) {
       this.vx *= -1;
     }
+    //ceiling
     if (this.ballTop < 0) {
       this.vy *= -1;
     }
+    //paddle collision
     const paddle = this.game.paddle;
     if (
       this.ballBottom > paddle.y &&
@@ -37,19 +43,20 @@ export default class Ball {
     }
 
     if (this.ballTop > this.game.height) {
-      this.game.lives -= 1;
+      this.active = false;
+      // this.game.lives -= 1;
 
-      if (this.game.lives <= 0) {
-        //Eman: used helper function in game.js
-        //to stop the game and print gameover
-        this.game.phase = "gameOver";
-        this.game.started = false;
-        this.game.extraBalls = [];
-      } else{ //if u have lives left
-        this.game.started = false;
-        this.game.resetPositions();
-        this.game.phase = "ready";
-      }
+      // if (this.game.lives <= 0) {
+      //   //Eman: used helper function in game.js
+      //   //to stop the game and print gameover
+      //   this.game.phase = "gameOver";
+      //   this.game.started = false;
+      //   this.game.extraBalls = [];
+      // } else{ //if u have lives left
+      //   this.game.started = false;
+      //   this.game.resetPositions();
+      //   this.game.phase = "ready";
+      // }
     }
   }
   get ballBottom() {return this.y + this.radius}
