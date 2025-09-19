@@ -50,7 +50,7 @@ class Brick {
   }
 
   detectCollision(ball){
-    return(ball.x > this.x && ball.x < this.brickRight &&
+    return(ball.x + ball.radius > this.x && ball.x - ball.radius < this.brickRight &&
       ball.ballTop < this.brickBottom && ball.ballBottom > this.y);
   }
   // detectCollision() {
