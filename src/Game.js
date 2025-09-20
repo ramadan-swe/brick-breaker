@@ -73,8 +73,8 @@ export default class Game {
     this.bricks = [];
 
     // Based on difficulty, determine rows, cols, and total bricks count
-    const rows = 3 + this.difficulty; // for example
-    const cols = 10; // for example
+    const rows = 3 + this.difficulty;
+    const cols = 10;
     const totalBricks = rows * cols * 0.66; // 66% of total positions randomly filled
 
     // Create a grid filled with false, indicating no brick
@@ -118,8 +118,9 @@ export default class Game {
     // Draw score and lives
     context.fillStyle = "white";
     context.font = "20px Pixelify";
-    if (this.phase == "playing" || this.phase == "ready")
-      context.fillText("Score: " + this.score, this.width - 100, 60);
+    if (this.phase == "playing" || this.phase == "ready") {
+      context.fillText("Score: " + this.score, this.width - 200, 30);
+    }
     context.fillText("Lives: " + this.lives, this.width - 100, 30);
 
     //in case we are not playing, show:
@@ -139,6 +140,20 @@ export default class Game {
         return;
       }
 
+      if (["win", "gameOver"].includes(this.phase)) {
+        const key = `${playerName.value}-topScore`;
+        const topScore = Number(localStorage.getItem(key)) || 0;
+
+        if (this.score > topScore) {
+          localStorage.setItem(key, this.score);
+        }
+
+        const topScoreText = Math.max(this.score, topScore);
+
+        context.textAlign = "center";
+        context.fillText("Top Score: " + topScoreText, this.width * 0.5, this.height * 0.7);
+      }
+
       if (this.phase === "win") {
         //place you win in the middle of the screen
         context.font = "30px Pixelify";
@@ -153,7 +168,7 @@ export default class Game {
         //Press esc to exit
         context.textAlign = "left";
         context.font = "20px Pixelify";
-        context.fillText("Press esc to exit", 10, 50);
+        context.fillText("Press esc to exit", 20, 50);
       }
       if (this.phase === "gameOver") {
         //place you win in the middle of the screen
@@ -170,7 +185,7 @@ export default class Game {
         //Press esc to exit
         context.textAlign = "left";
         context.font = "20px Pixelify";
-        context.fillText("Press esc to exit", 10, 30);
+        context.fillText("Press esc to exit", 20, 50);
       }
       if (this.phase == "ready") {
         context.textAlign = "center";
@@ -202,17 +217,17 @@ export default class Game {
       ball.draw(context);
       if (this.started) ball.update();
     });
-    if(this.phase == "playing"){
+    if (this.phase == "playing") {
       const activeBalls = [this.ball, ...this.extraBalls].filter(b => b.y - b.radius < this.height);
-      if(activeBalls.length === 0){
+      if (activeBalls.length === 0) {
         this.lives -= 1;
-        if(this.lives > 0){
+        if (this.lives > 0) {
           this.resetPositions();
           this.phase = "ready";
           this.started = false;
-          if(this.ball) this.ball.active = true;
+          if (this.ball) this.ball.active = true;
           this.extraBalls = [];
-      } else{
+        } else {
           this.phase = "gameOver";
           this.started = false;
           this.extraBalls = [];
