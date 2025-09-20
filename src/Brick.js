@@ -1,14 +1,11 @@
 class Brick {
   constructor(game) {
     this.game = game;
-    const config = game.config || {};
-    const brickConfig = config.brick || {};
-
-    this.width = brickConfig.width || 75;
-    this.height = brickConfig.height || 30;
-    this.padding = brickConfig.padding || 10;
-    this.offsetTop = brickConfig.offsetTop || 50;
-    this.offsetLeft = brickConfig.offsetLeft || 50;
+    this.width = 70;
+    this.height = 30;
+    this.padding = 10;
+    this.offsetTop = 75;
+    this.offsetLeft = 50;
 
     this.x = this.offsetTop;
     this.y = this.offsetLeft;
