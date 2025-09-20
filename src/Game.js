@@ -52,7 +52,7 @@ export default class Game {
     });
 
     window.addEventListener("keyup", (e) => {
-      if (!this.started) return;
+      // if (!this.started) return;
       const index = this.keys.indexOf(e.key);
       if (index > -1) this.keys.splice(index, 1);
     });
@@ -217,6 +217,7 @@ export default class Game {
       ball.draw(context);
       if (this.started) ball.update();
     });
+
     if (this.phase == "playing") {
       const activeBalls = [this.ball, ...this.extraBalls].filter(b => b.y - b.radius < this.height);
       if (activeBalls.length === 0) {
@@ -225,6 +226,7 @@ export default class Game {
           this.resetPositions();
           this.phase = "ready";
           this.started = false;
+          this.keys = []; //clear any leftover keys
           if (this.ball) this.ball.active = true;
           this.extraBalls = [];
         } else {
@@ -267,6 +269,7 @@ export default class Game {
   startPlaying() {
     this.phase = "playing";
     this.started = true;
+    if(this.ball) this.ball.active = true;
   }
   //progress to next level
   goToNextLevel() {
@@ -274,6 +277,7 @@ export default class Game {
     this.initializeBricks();
     this.resetPositions();
     this.startPlaying();
+    this.extraBalls = [];
   }
   //restart the game upon losing
   restart() {
