@@ -104,6 +104,31 @@ window.addEventListener("DOMContentLoaded", () => {
   LeaderBoardBtn.addEventListener("click", () => {
     document.getElementById("main-menu").style.display = "none";
     document.getElementById("leader-board").style.display = "flex";
+    const scoreList = document.getElementById("score-list");
+
+    scoreList.innerHTML = ""; // clear previous list
+
+    // Get scores from localStorage
+    const scores = JSON.parse(localStorage.getItem("playerTopScores")) || {};
+
+    // Convert object to array: [ [name, score], ... ]
+    const scoreArray = Object.entries(scores);
+
+    // Sort by score descending
+    scoreArray.sort((a, b) => b[1] - a[1]);
+
+    // Take top 5
+    const topFive = scoreArray.slice(0, 5);
+
+    // Render into <li> elements
+    topFive.forEach(([name, score]) => {
+      scoreList.innerHTML += `
+        <li style="display: flex; justify-content: space-between; align-items: center; margin: 5px 0;">
+          <div style="margin-right: 40px;">${name}</div>
+          <div>Score: ${score}</div>
+        </li>
+      `;
+    });
   });
 
   // Music controls

@@ -118,7 +118,7 @@ export default class Game {
     context.fillStyle = "white";
     context.font = "20px Pixelify";
     if (this.phase == "playing" || this.phase == "ready") {
-      context.fillText("Score: " + this.score, this.width - 200, 30);
+      context.fillText("Score: " + this.score, this.width - 300, 30);
     }
     context.fillText("Lives: " + this.lives, this.width - 100, 30);
 
@@ -140,15 +140,20 @@ export default class Game {
       }
 
       if (["win", "gameOver"].includes(this.phase)) {
-        const key = `${playerName.value}-topScore`;
-        const topScore = Number(localStorage.getItem(key)) || 0;
-
+        // Get existing scores object from localStorage
+        const scores = JSON.parse(localStorage.getItem("playerTopScores")) || {};
+      
+        // Current top score for this player (default 0 if none yet)
+        const topScore = scores[playerName.value] || 0;
+      
+        // Update if new score is higher
         if (this.score > topScore) {
-          localStorage.setItem(key, this.score);
+          scores[playerName.value] = this.score;
+          localStorage.setItem("playerTopScores", JSON.stringify(scores));
         }
-
+      
         const topScoreText = Math.max(this.score, topScore);
-
+      
         context.textAlign = "center";
         context.fillText(
           "Top Score: " + topScoreText,

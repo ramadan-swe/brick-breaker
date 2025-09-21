@@ -5,11 +5,11 @@ class Brick {
     this.width = 70;
     this.height = 30;
     this.padding = 10;
-    this.offsetTop = 75;
-    this.offsetLeft = 50;
+    this.offsetTop = 50;
+    this.offsetLeft = 75;
 
-    this.x = this.offsetTop;
-    this.y = this.offsetLeft;
+    this.x = this.offsetLeft;
+    this.y = this.offsetTop;
     this.broken = false;
 
     this.ball = this.game.ball;

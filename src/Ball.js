@@ -4,7 +4,7 @@ export default class Ball {
     this.radius = 12;
     this.x = this.game.width * 0.5;
     this.y = this.game.height * 0.5;
-    this.speed = 3;
+    this.speed = 4;
     this.vx = 1 * this.speed;
     this.vy = 2 * this.speed;
     this.active = true;
