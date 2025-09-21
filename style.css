@@ -1,0 +1,292 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Pixelify";
+  src: url("./Fonts/Pixelify_Sans/PixelifySans-Medium.ttf") format("truetype");
+}
+
+html {
+  min-height: 100%;
+  background: url(./assets/xChy58V.png) repeat;
+  background-size: cover;
+  font-family: "Pixelify", sans-serif;
+  animation: moveBg 20s linear infinite;
+}
+
+@keyframes moveBg {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -1000px;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+#canvas {
+  border: 1px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 720px;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: url(./assets/xChy58V.png) center center / cover no-repeat fixed;
+  display: none;
+  z-index: 200;
+}
+
+#main-menu,
+#difficulty-menu,
+#setting-menu,
+#leader-board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  letter-spacing: 4px;
+}
+
+#main-menu h1,
+#difficulty-menu h1,
+#setting-menu h1,
+#leader-board h1 {
+  margin-bottom: 10px;
+  font-size: 6.5em;
+  color: #e0e8ff;
+}
+
+#main-menu div,
+#difficulty-menu,
+#setting-menu div,
+#leader-board div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#main-menu button,
+#difficulty-menu button,
+#setting-menu button,
+#leader-board button {
+  width: 300px;
+  max-width: 90%;
+  background: #3a6ea5;
+  display: block;
+  position: relative;
+  text-align: center;
+  font-size: 30px;
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: "Pixelify", sans-serif;
+  text-decoration: none;
+  color: #e0e8ff;
+  box-shadow: inset -4px -4px 0px 0px #274472;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#main-menu button:hover,
+#main-menu button:focus,
+#difficulty-menu button:hover,
+#difficulty-menu button:focus,
+#setting-menu button:hover,
+#setting-menu button:focus,
+#leader-board button:hover,
+#leader-board button:focus {
+  background: #5d92e7;
+  box-shadow: inset -6px -6px 0px 0px #19335c;
+  animation: bounce 0.6s ease-in-out infinite;
+}
+
+#main-menu button:active,
+#difficulty-menu button:active,
+#setting-menu button:active,
+#leader-board button:active {
+  box-shadow: inset 4px 4px 0px 0px #19335c;
+}
+
+#main-menu button::after,
+#main-menu button::before,
+#difficulty-menu button::after,
+#difficulty-menu button::before,
+#setting-menu button::after,
+#setting-menu button::before,
+#leader-board button::after,
+#leader-board button::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+}
+
+#main-menu button::before,
+#difficulty-menu button::before,
+#setting-menu button::before,
+#leader-board button::before {
+  top: -6px;
+  left: 0;
+  border-top: 6px rgba(60, 90, 150, 0.5) solid;
+  border-bottom: 6px rgba(60, 90, 150, 0.5) solid;
+}
+
+#main-menu button::after,
+#difficulty-menu button::after,
+#setting-menu button::after,
+#leader-board button::after {
+  left: -6px;
+  top: 0;
+  border-left: 6px rgba(60, 90, 150, 0.5) solid;
+  border-right: 6px rgba(60, 90, 150, 0.5) solid;
+}
+
+#Music div {
+  display: flex;
+  flex-direction: row !important;
+  gap: 10px;
+  width: 20%;
+}
+
+#Music button {
+  min-width: 120px;
+  width: 120px;
+  height: 70px;
+  font-size: 1em;
+  padding: 10px 0;
+  margin: 30px 2px;
+  margin-top: 10px;
+}
+
+#MusicVolume {
+  -webkit-appearance: none;
+  width: 220px;
+  height: 10px;
+  background: #19335c;
+  border: 2px solid #3a9bdc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(60, 90, 150, 0.5);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#MusicVolume::-webkit-slider-runnable-track {
+  height: 10px;
+  background: linear-gradient(90deg, #3a9bdc, #5d92e7, #e0e8ff);
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(60, 90, 150, 0.8);
+  transition: background 0.5s ease-in-out;
+}
+
+#MusicVolume::-moz-range-track {
+  height: 10px;
+  background: linear-gradient(90deg, #3a9bdc, #5d92e7, #e0e8ff);
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(60, 90, 150, 0.8);
+}
+
+#MusicVolume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #e0e8ff, #5d92e7, #19335c);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #5d92e7, 0 0 25px rgba(93, 146, 231, 0.8);
+  margin-top: -4px;
+  cursor: pointer;
+  animation: neonSpin 3s infinite linear, colorShift 4s infinite alternate;
+}
+
+#MusicVolume::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #e0e8ff, #5d92e7, #19335c);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #5d92e7, 0 0 25px rgba(93, 146, 231, 0.8);
+  cursor: pointer;
+  animation: neonSpin 3s infinite linear, colorShift 4s infinite alternate;
+}
+#main-menu input[type="text"] {
+  font-size: 1.2em;
+  padding: 40px 16px;
+  margin-bottom: 18px;
+  min-width: 308px;
+  border: 2px solid #3a6ea5;
+  border-radius: 8px;
+  outline: none;
+  background: #e0e8ff;
+  color: #19335c;
+  box-shadow: 0 2px 8px rgba(60, 90, 150, 0.08);
+  transition: border 0.2s, box-shadow 0.2s;
+  text-align: center;
+  font-family: "Pixelify", sans-serif;
+}
+
+.canvas-mute-btn {
+  position: absolute;
+  z-index: 300;
+  width: 22px;
+  height: 22px;
+  font-size: 16px;
+  background: #3a6ea5;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(60, 90, 150, 0.18);
+  transition: background 0.3s;
+  display: none;
+}
+
+#leader-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#leader-board ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 70%;
+}
+#leader-board ul li {
+  background: rgba(58, 110, 165, 0.8);
+  color: #e0e8ff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-size: 1.2em;
+  text-align: center;
+  box-shadow: inset -2px -2px 0px 0px #274472;
+}
+#leader-board ul li:hover {
+  animation: bounce 1s ease-in-out infinite;
+}

@@ -3,10 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>brick-breaker</title>
+    <title>Brick Breaker</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/assets/Brick Breaker Game.png"
+    />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <script src="./script.js"></script>
+    <!-- game menu -->
+    <div id="main-menu">
+      <div>
+        <h1>Brick Breaker</h1>
+      </div>
+      <div>
+        <input
+          id="playerName"
+          type="text"
+          placeholder="Enter your name"
+          required
+          style="
+            font-size: 1.2em;
+            padding: 10px;
+            margin-bottom: 15px;
+            width: 260px;
+          "
+        />
+        <button id="startBtn">Start Game</button>
+        <button id="difficulty">Select Difficulty</button>
+        <button id="LeaderBoardBtn">Leaderboard</button>
+        <button id="SettingBtn">Setting</button>
+      </div>
+    </div>
+    <!-- difficulty menu -->
+    <div id="difficulty-menu" style="display: none">
+      <div>
+        <h1>Select Difficulty</h1>
+      </div>
+      <div>
+        <button id="Easy">Easy</button>
+        <button id="Medium">Medium</button>
+        <button id="Hard">Hard</button>
+        <button id="Back">Back</button>
+      </div>
+    </div>
+    <!-- Leaderboard -->
+    <div id="leader-board" style="display: none">
+      <div><h1>Leaderboard</h1></div>
+      <ul id="score-list">
+        <!-- Scores will be populated here -->
+        <li>name // score</li>
+        <li>name // score</li>
+        <li>name // score</li>
+        <li>name // score</li>
+        <li>name // score</li>
+        <li>name // score</li>
+      </ul>
+      <button id="Back">Back</button>
+    </div>
+    <!-- Setting menu -->
+    <div id="setting-menu" style="display: none">
+      <div>
+        <h1>Setting</h1>
+      </div>
+      <div>
+        <div id="Music">
+          <input
+            type="range"
+            id="MusicVolume"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.1"
+          />
+          <div>
+            <button id="PrevMusic">Prev Music</button>
+            <button id="NextMusic">Next Music</button>
+            <button id="MuteMusic">Mute</button>
+          </div>
+        </div>
+        <button id="Back">Back</button>
+      </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+    <button id="CanvasMuteBtn" class="canvas-mute-btn">🔊</button>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>
