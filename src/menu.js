@@ -95,8 +95,15 @@ window.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => {
       document.getElementById("setting-menu").style.display = "none";
       document.getElementById("difficulty-menu").style.display = "none";
+      document.getElementById("leader-board").style.display = "none";
       document.getElementById("main-menu").style.display = "flex";
     });
+  });
+
+  const LeaderBoardBtn = document.getElementById("LeaderBoardBtn");
+  LeaderBoardBtn.addEventListener("click", () => {
+    document.getElementById("main-menu").style.display = "none";
+    document.getElementById("leader-board").style.display = "flex";
   });
 
   // Music controls

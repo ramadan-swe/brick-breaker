@@ -5,7 +5,7 @@ import {
   SettingMenu,
   positionMuteBtn,
 } from "./menu.js";
-import { playHitSound } from "./Music.js";
+import { playHitSound, playMusic, isGameMuted } from "./Music.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas");
