@@ -13,6 +13,9 @@ export default class Paddle {
     this.x = mouseX - this.width * 0.5;
     });
   }
+  resetWidth() {
+    this.width = 250;
+  }
   draw(context) {
     context.fillStyle = "white";
     context.fillRect(this.x, this.y, this.width, this.height);

@@ -63,13 +63,15 @@ export default class Powerup {
         this.game.lives += 1;
         break;
       case "multiBall":
-        // Add a new ball with random direction
-        // const newBall = new this.game.ball.constructor(this.game);
+        const activeBalls = [this.game.ball, ...(this.game.extraBalls || [])];
+        const candidates = activeBalls.filter(b => b && b.active && b.y - b.radius < this.game.height);
+        const srcBall = candidates.length ? candidates[Math.floor(Math.random()* candidates.length)] : this.game.ball;
+
         const newBall = new Ball(this.game);
-        newBall.x = this.game.ball.x;
-        newBall.y = this.game.ball.y;
-        newBall.vx = -this.game.ball.vx; // opposite direction
-        newBall.vy = this.game.ball.vy;
+        newBall.x = srcBall.x;
+        newBall.y = srcBall.y;
+        newBall.vx = -srcBall.vx; // opposite direction
+        newBall.vy = srcBall.vy;
         this.game.extraBalls = this.game.extraBalls || [];
         this.game.extraBalls.push(newBall);
         break;

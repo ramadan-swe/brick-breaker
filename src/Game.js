@@ -278,6 +278,7 @@ export default class Game {
     this.resetPositions();
     this.startPlaying();
     this.extraBalls = [];
+    this.paddle.resetWidth();
   }
   //restart the game upon losing
   restart() {
@@ -287,6 +288,9 @@ export default class Game {
     this.initializeBricks();
     this.resetPositions();
     this.startPlaying();
+    this.extraBalls = [];
+    this.paddle.resetWidth();
+    this.powerups = [];
   }
   //Return to main menu
   returnToMainMenu() {
