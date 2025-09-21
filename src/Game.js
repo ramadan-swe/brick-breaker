@@ -46,6 +46,21 @@ export default class Game {
           return;
         }
       }
+      if (this.phase == "ready") {
+        if (e.code === "Space") {
+          this.started = true;
+          return;
+        }
+        if (e.code === "Escape") {
+          this.returnToMainMenu();
+          return;
+        }
+      }
+      if(this.phase == "playing" && e.code === "Escape"){
+        this.phase = "ready";
+        this.started = false;
+        this.keys = [];
+      }
 
       if (!this.started) return;
       if (this.keys.indexOf(e.key) === -1) this.keys.push(e.key);
