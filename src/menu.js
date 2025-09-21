@@ -52,7 +52,7 @@ function startGame() {
   canvas.style.display = "block";
   menu.style.display = "none";
   muteBtn.style.display = "block";
-  playHitSound();
+  playMusic(0);
   positionMuteBtn();
 }
 

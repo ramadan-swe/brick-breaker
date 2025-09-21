@@ -294,7 +294,7 @@ export default class Game {
   startPlaying() {
     this.phase = "playing";
     this.started = true;
-    if(this.ball) this.ball.active = true;
+    if (this.ball) this.ball.active = true;
   }
   //progress to next level
   goToNextLevel() {
