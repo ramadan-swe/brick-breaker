@@ -1,20 +1,40 @@
 import Ball from "./Ball.js";
 
 export default class Powerup {
-  constructor(game, x, y) {
+  constructor(game, x, y, type) {
     this.game = game;
     this.x = x;
     this.y = y;
-    this.type = "expand"; // e.g., 'expand', 'shrink', 'extraLife'
-    this.width = 20;
-    this.height = 20;
-    this.speed = 2;
+    this.type = type; // e.g., 'expand', 'shrink', 'extraLife'
+    this.width = 60;
+    this.height = 25;
+    this.speed = 3;
     this.active = true;
+
+    // Set image based on type
+    this.image = new Image();
+    switch (this.type) {
+      case "expand":
+        this.image.src = "./assets/expand.png";
+        break;
+      case "shrink":
+        this.image.src = "./assets/shrink.png";
+        break;
+      case "extraLife":
+        this.image.src = "./assets/extralife.png";
+        this.width = 30;
+        this.height = 30;
+        break;
+      case "multiBall":
+        this.image.src = "./assets/multiball.png";
+        break;
+    }
   }
+
   draw(context) {
-    context.fillStyle = this.getColor();
-    context.fillRect(this.x, this.y, this.width, this.height);
+    context.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
+
   update() {
     this.y += this.speed;
     if (this.y > this.game.height) {
@@ -31,20 +51,7 @@ export default class Powerup {
       this.active = false;
     }
   }
-  getColor() {
-    switch (this.type) {
-      case "expand":
-        return "green";
-      case "shrink":
-        return "red";
-      case "extraLife":
-        return "blue";
-      case "multiBall":
-        return "purple";
-      default:
-        return "white";
-    }
-  }
+
   applyEffect() {
     switch (this.type) {
       case "expand":

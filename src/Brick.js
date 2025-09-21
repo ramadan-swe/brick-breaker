@@ -1,3 +1,4 @@
+import { playHitSound } from "./Music.js";
 class Brick {
   constructor(game) {
     this.game = game;
@@ -31,24 +32,29 @@ class Brick {
   //   }
   // }
 
-  update(){
-    if(this.broken) return;
+  update() {
+    if (this.broken) return;
 
     const balls = [this.game.ball, ...(this.game.extraBalls || [])];
-    for(const b of balls){
-      if(this.detectCollision(b)){
+    for (const b of balls) {
+      if (this.detectCollision(b)) {
         this.broken = true;
         b.vy = -b.vy;
-        this.game.score +=10;
+        this.game.score += 10;
         this.game.spawnPowerup(b.x, b.y);
+        playHitSound();
         break;
       }
     }
   }
 
-  detectCollision(ball){
-    return(ball.x + ball.radius > this.x && ball.x - ball.radius < this.brickRight &&
-      ball.ballTop < this.brickBottom && ball.ballBottom > this.y);
+  detectCollision(ball) {
+    return (
+      ball.x + ball.radius > this.x &&
+      ball.x - ball.radius < this.brickRight &&
+      ball.ballTop < this.brickBottom &&
+      ball.ballBottom > this.y
+    );
   }
   // detectCollision() {
   //   if (

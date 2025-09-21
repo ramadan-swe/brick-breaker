@@ -1,7 +1,7 @@
 export default class Ball {
   constructor(game) {
     this.game = game;
-    this.radius = 10;
+    this.radius = 12;
     this.x = this.game.width * 0.5;
     this.y = this.game.height * 0.5;
     this.speed = 3;
@@ -10,9 +10,23 @@ export default class Ball {
     this.active = true;
   }
   draw(context) {
+    const gradient = context.createRadialGradient(
+      this.x,
+      this.y,
+      this.radius * 0.2,
+      this.x,
+      this.y,
+      this.radius
+    );
+    gradient.addColorStop(0, "#e0e8ff"); // light center
+    gradient.addColorStop(0.5, "#e4a214ff"); // mid blue
+    gradient.addColorStop(1, "#f85234ff"); // dark edge
+
     context.beginPath();
     context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    context.fillStyle = "white";
+    context.fillStyle = gradient;
+    context.shadowColor = "#eeff00ff";
+
     context.fill();
   }
   update() {
@@ -59,6 +73,10 @@ export default class Ball {
       // }
     }
   }
-  get ballBottom() {return this.y + this.radius}
-  get ballTop() {return this.y - this.radius}
+  get ballBottom() {
+    return this.y + this.radius;
+  }
+  get ballTop() {
+    return this.y - this.radius;
+  }
 }

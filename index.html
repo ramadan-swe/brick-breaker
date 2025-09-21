@@ -27,6 +27,7 @@
         />
         <button id="startBtn">Start Game</button>
         <button id="difficulty">Select Difficulty</button>
+        <button id="LeaderBoardBtn">Leaderboard</button>
         <button id="SettingBtn">Setting</button>
       </div>
     </div>
@@ -41,6 +42,20 @@
         <button id="Hard">Hard</button>
         <button id="Back">Back</button>
       </div>
+    </div>
+    <!-- Leaderboard -->
+    <div id="leader-board" style="display: none">
+      <div><h1>Leaderboard</h1></div>
+      <ul id="score-list">
+        <!-- Scores will be populated here -->
+        <li>name // score</li>
+        <li>name // score</li>
+        <li>name // score</li>
+        <li>name // score</li>
+        <li>name // score</li>
+        <li>name // score</li>
+      </ul>
+      <button id="Back">Back</button>
     </div>
     <!-- Setting menu -->
     <div id="setting-menu" style="display: none">
@@ -60,15 +75,13 @@
           <div>
             <button id="PrevMusic">Prev Music</button>
             <button id="NextMusic">Next Music</button>
-
             <button id="MuteMusic">Mute</button>
-            <span id="MusicName"></span>
           </div>
         </div>
-        <button id="Theme">Theme</button>
         <button id="Back">Back</button>
       </div>
     </div>
+
     <canvas id="canvas"></canvas>
     <button id="CanvasMuteBtn" class="canvas-mute-btn">🔊</button>
     <script type="module" src="./src/main.js"></script>
