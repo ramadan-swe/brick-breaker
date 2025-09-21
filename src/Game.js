@@ -58,13 +58,12 @@ export default class Game {
     });
   }
   spawnPowerup(x, y) {
-    let probailty = Math.floor(Math.random() * 100);
+    let probailty = Math.floor(Math.random() * 10);
     if (probailty < 20) {
       // Randomly choose a type
       const types = ["expand", "shrink", "extraLife", "multiBall"];
       const type = types[Math.floor(Math.random() * types.length)];
-      const powerup = new Powerup(this, x, y);
-      powerup.type = type;
+      const powerup = new Powerup(this, x, y, type);
       this.powerups.push(powerup);
     }
   }
@@ -151,7 +150,11 @@ export default class Game {
         const topScoreText = Math.max(this.score, topScore);
 
         context.textAlign = "center";
-        context.fillText("Top Score: " + topScoreText, this.width * 0.5, this.height * 0.7);
+        context.fillText(
+          "Top Score: " + topScoreText,
+          this.width * 0.5,
+          this.height * 0.7
+        );
       }
 
       if (this.phase === "win") {
@@ -208,17 +211,19 @@ export default class Game {
     this.ball.draw(context);
     this.paddle.draw(context);
     // Draw bricks
-    this.drawBricks(context)
+    this.drawBricks(context);
     //removing the balls that falls under the screen
     this.extraBalls = this.extraBalls.filter(
       (ball) => ball.y - ball.radius < this.height
-    ); //update & draw extra balls 
+    ); //update & draw extra balls
     this.extraBalls.forEach((ball) => {
       ball.draw(context);
       if (this.started) ball.update();
     });
     if (this.phase == "playing") {
-      const activeBalls = [this.ball, ...this.extraBalls].filter(b => b.y - b.radius < this.height);
+      const activeBalls = [this.ball, ...this.extraBalls].filter(
+        (b) => b.y - b.radius < this.height
+      );
       if (activeBalls.length === 0) {
         this.lives -= 1;
         if (this.lives > 0) {
@@ -234,7 +239,6 @@ export default class Game {
         }
       }
     }
-
 
     // Draw and update powerups
     this.powerups = this.powerups.filter((p) => p.active);

@@ -39,7 +39,7 @@ function muteMusic() {
 
 // Hit sound effect
 
-const hitSound = new Audio("../assets/sounds/startgame.mp3");
+const hitSound = new Audio("../assets/sounds/hiteffect.wav");
 function playHitSound() {
   hitSound.currentTime = 0;
   hitSound.play();
