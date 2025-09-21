@@ -73,7 +73,7 @@ export default class Game {
     });
   }
   spawnPowerup(x, y) {
-    let probailty = Math.floor(Math.random() * 10);
+    let probailty = Math.floor(Math.random() * 100);
     if (probailty < 20) {
       // Randomly choose a type
       const types = ["expand", "shrink", "extraLife", "multiBall"];
@@ -294,7 +294,7 @@ export default class Game {
   startPlaying() {
     this.phase = "playing";
     this.started = true;
-    if(this.ball) this.ball.active = true;
+    if (this.ball) this.ball.active = true;
   }
   //progress to next level
   goToNextLevel() {

@@ -1,10 +1,5 @@
 import Game from "./Game.js";
-import {
-  startGame,
-  chooseDifficultyLevel,
-  SettingMenu,
-  positionMuteBtn,
-} from "./menu.js";
+import { positionMuteBtn } from "./menu.js";
 import { playHitSound, playMusic, isGameMuted } from "./Music.js";
 
 window.addEventListener("load", () => {
@@ -29,7 +24,6 @@ window.addEventListener("load", () => {
       document.getElementById("CanvasMuteBtn").style.display = "block";
       game.startPlaying();
       positionMuteBtn();
-      playHitSound();
     });
   });
 
