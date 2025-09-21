@@ -264,6 +264,7 @@ export default class Game {
     //velocity along the x and y axis
     this.ball.vx = 1 * this.ball.speed;
     this.ball.vy = 2 * this.ball.speed;
+    this.paddle.resetWidth();
   }
 
   startPlaying() {
@@ -278,7 +279,6 @@ export default class Game {
     this.resetPositions();
     this.startPlaying();
     this.extraBalls = [];
-    this.paddle.resetWidth();
   }
   //restart the game upon losing
   restart() {
@@ -289,7 +289,6 @@ export default class Game {
     this.resetPositions();
     this.startPlaying();
     this.extraBalls = [];
-    this.paddle.resetWidth();
     this.powerups = [];
   }
   //Return to main menu
