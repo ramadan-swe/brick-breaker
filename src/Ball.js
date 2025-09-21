@@ -10,6 +10,8 @@ export default class Ball {
     this.active = true;
   }
   draw(context) {
+    // create a radial gradient for the ball's color effect
+    // center is lighter and edges are darker to give a 3D spherical appearance
     const gradient = context.createRadialGradient(
       this.x,
       this.y,
@@ -45,32 +47,20 @@ export default class Ball {
     //paddle collision
     const paddle = this.game.paddle;
     if (
-      this.ballBottom > paddle.y &&
-      this.x > paddle.x &&
-      this.x < paddle.x + paddle.width &&
-      this.ballTop < paddle.y + paddle.height
+      this.ballBottom > paddle.y && // bottom of ball below top of paddle
+      this.x > paddle.x && // ball right of paddle left edge
+      this.x < paddle.x + paddle.width && // ball left of paddle right edge
+      this.ballTop < paddle.y + paddle.height // top of ball above bottom of paddle
     ) {
-      this.vy *= -1;
-      const hitPos = (this.x - paddle.x) / paddle.width;
-      this.vx = (hitPos - 0.5) * 2 * this.speed;
-      this.y = paddle.y - this.radius;
+      this.vy *= -1; // reverse vertical velocity to bounce
+      const hitPos = (this.x - paddle.x) / paddle.width; // relative hit position on paddle (0 to 1)
+      this.vx = (hitPos - 0.5) * 2 * this.speed; // adjust horizontal velocity proportional to hit position
+      this.y = paddle.y - this.radius; // reposition ball on top of paddle to prevent sticking
     }
 
+    // check if ball has fallen below the bottom of the screen
     if (this.ballTop > this.game.height) {
-      this.active = false;
-      // this.game.lives -= 1;
-
-      // if (this.game.lives <= 0) {
-      //   //Eman: used helper function in game.js
-      //   //to stop the game and print gameover
-      //   this.game.phase = "gameOver";
-      //   this.game.started = false;
-      //   this.game.extraBalls = [];
-      // } else{ //if u have lives left
-      //   this.game.started = false;
-      //   this.game.resetPositions();
-      //   this.game.phase = "ready";
-      // }
+      this.active = false; // deactivate the ball as it is out of play
     }
   }
   get ballBottom() {
