@@ -259,6 +259,7 @@ export default class Game {
     this.initializeBricks();
     this.resetPositions();
     this.startPlaying();
+    this.paddle.width = 250;
   }
   //restart the game upon losing
   restart() {
