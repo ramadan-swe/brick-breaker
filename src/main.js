@@ -24,6 +24,7 @@ window.addEventListener("load", () => {
       document.getElementById("CanvasMuteBtn").style.display = "block";
       game.startPlaying();
       positionMuteBtn();
+      playMusic(0);
     });
   });
 
